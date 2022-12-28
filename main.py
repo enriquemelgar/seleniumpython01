@@ -1,5 +1,6 @@
 import unittest
 from selenium import webdriver
+import tests.latam_airlines_main_page_test as LatamAirlinesMainPageTest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
@@ -17,9 +18,17 @@ class GoogleTestCase(unittest.TestCase):
         self.assertIn('Google', self.browser.title)
 
 
-# Press the green button in the gutter to run the script.
+def suite():
+    suite = unittest.TestSuite()
+    suite.addTest(LatamAirlinesMainPageTest.LatamAirlinesMainPageTestCase('test_page_title'))
+    suite.addTest(GoogleTestCase('test_page_title'))
+    return suite
+
+
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    runner = unittest.TextTestRunner()
+    runner.run(suite())
+    # unittest.main(verbosity=2)
     # browser = webdriver.Chrome()
     # browser.get('http://www.yahoo.com/')
     # assert 'Yahoo' in browser.title
